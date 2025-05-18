@@ -86,7 +86,7 @@ module ringz(count, ring_width = 4.4, height = 10, margin = 0.2) {
             for (j = [0 : 7]) {
                 angle = j * 45;
 
-                // ✅ Set len = 2 for rings 1 and 2; use slot_lengths for ring 3+
+                // Set len = 2 for rings 1 and 2; use slot_lengths for ring 3+
                 len = (i <= 2) ? 2 : slot_lengths[j];
 
                 rotate([0, 0, angle])
