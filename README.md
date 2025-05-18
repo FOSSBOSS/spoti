@@ -1,5 +1,5 @@
 You have seen these types of images for getting music from spotify, using the app, or a webcamera.
-
+<img src="beats.jpeg">
 well, this weekend I thought it might be fun to create a cipher wheel that functions the same way 
 as a ceaser cipher wheel does. The spotify encoding has some rules with complex math you can read all about here:
 
