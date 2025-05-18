@@ -1,13 +1,5 @@
 $fn = 100;
-/*
-The optimization here reffers to the minimum sizing realted to the total build volume. 
-the opimizations in clude setting the first ring to 1, which is important to the spotify cipher codex,
-and organizing the cuts (hullz()) to put longer cuts next to shorter cuts to minumize space used.
 
-Todo: 
-the logo, bit0 obsures the first ring.
-
-*/
 module arcz(radius = 10, angle = 90, thickness = 2, steps = 100, center = [0, 0]) {
     r1 = radius;
     r2 = radius - thickness;
@@ -34,30 +26,30 @@ module logo(){
 //--- Main difference block ---
 difference() {
     // Background cylinder
-    cylinder(h = 10, r = 10, $fn = 100);
+    cylinder(h = 10, r = 5.3, $fn = 100);
 
     // Arc 1
-    translate([-6, 0, 0])
-    linear_extrude(10)
-    difference() {
-        arcz(radius = 6, angle = 120, thickness = 2);
-        translate([-1, 0]) arcz(radius = 6, angle = 120, thickness = 2);
-    }
-
-    // Arc 2
     translate([-5, 0, 0])
     linear_extrude(10)
     difference() {
-        arcz(radius = 8, angle = 120, thickness = 2);
-        translate([-1, 0]) arcz(radius = 8, angle = 120, thickness = 2);
+        arcz(radius = 3, angle = 120, thickness = 2);
+        translate([-1, 0]) arcz(radius = 3, angle = 120, thickness = 2);
+    }
+
+    // Arc 2
+    translate([-3, 0, 0])
+    linear_extrude(10)
+    difference() {
+        arcz(radius = 4, angle = 120, thickness = 2);
+        translate([-1, 0]) arcz(radius = 4, angle = 120, thickness = 2);
     }
 
     // Arc 3
-    translate([-4, 0, 0])
+    translate([-1, 0, 0])
     linear_extrude(10)
     difference() {
-        arcz(radius = 10, angle = 120, thickness = 2);
-        translate([-1, 0]) arcz(radius = 10, angle = 120, thickness = 2);
+        arcz(radius = 5, angle = 120, thickness = 2);
+        translate([-1, 0]) arcz(radius = 5, angle = 120, thickness = 2);
     }
 }
 }
@@ -94,7 +86,7 @@ module ringz(count, ring_width = 5, height = 10, margin = 0.2) {
             for (j = [0 : 7]) {
                 angle = j * 45;
 
-                // ✅ Set len = 2 for rings 1 and 2; use slot_lengths for ring 3+
+                // Set len = 2 for rings 1 and 2; use slot_lengths for ring 3+
                 len = (i <= 2) ? 2 : slot_lengths[j];
 
                 rotate([0, 0, angle])
