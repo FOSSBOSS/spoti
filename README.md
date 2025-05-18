@@ -26,4 +26,9 @@ cuasing clipping conflicts.
 Go here to generate spotify codes like a normal human:
 https://www.spotifycodes.com/
 
+Estimated print time:
+11 Hours on a Bambu labs A1
+
+300g filament. 
+
 
