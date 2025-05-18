@@ -26,7 +26,7 @@ module logo(){
 //--- Main difference block ---
 difference() {
     // Background cylinder
-    cylinder(h = 10, r = 5.3, $fn = 100);
+    cylinder(h = 10, r = 4.7, $fn = 100);
 
     // Arc 1
     translate([-5, 0, 0])
@@ -56,7 +56,7 @@ difference() {
 
 logo();
 
-module hullz(length = 1, w = 3, h = 1) {
+module hullz(length = 1, w = 2.5, h = 1) {
     radius = w / 2;
 
     hull() {
@@ -69,10 +69,10 @@ module hullz(length = 1, w = 3, h = 1) {
 
 
 
-module ringz(count, ring_width = 5, height = 10, margin = 0.2) {
+module ringz(count, ring_width = 4.4, height = 10, margin = 0.2) {
     slot_lengths = [2, 9, 3, 8, 4, 7, 5, 6];  // Safe pattern: short/long balanced
 
-    for (i = [2 : count+1]) {
+    for (i = [2 : count]) {
         outer_radius = i * (ring_width + margin);
         inner_radius = outer_radius - ring_width;
         mid_radius = (outer_radius + inner_radius) / 2;
@@ -86,7 +86,7 @@ module ringz(count, ring_width = 5, height = 10, margin = 0.2) {
             for (j = [0 : 7]) {
                 angle = j * 45;
 
-                // Set len = 2 for rings 1 and 2; use slot_lengths for ring 3+
+                // ✅ Set len = 2 for rings 1 and 2; use slot_lengths for ring 3+
                 len = (i <= 2) ? 2 : slot_lengths[j];
 
                 rotate([0, 0, angle])
