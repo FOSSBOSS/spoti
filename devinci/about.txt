@@ -1,0 +1,2 @@
+IDK how to seperate the objects from the STL.
+so i made multiple files
