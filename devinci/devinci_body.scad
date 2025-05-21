@@ -170,7 +170,16 @@ rotate([90,0,90]) cylinder(40,5.5,5.5);
 // MAKE A BODY
 translate([0,0,-100]){
 difference(){ 
- cylinder(132,12,13.2);
- cylinder(132,10,10);
+    //how long tho?
+    /*
+    ah... ring height * 22 rings. so 5*22=110
+    + what? 0.. filled body with a different ring
+    */
+ cylinder(112,12,13.2); //13.2 is 0.13 less than ring inner radius
+ cylinder(112,10,10);
 }
 }
+/*
+Could make an end cap..
+you need 22 rings
+*/
