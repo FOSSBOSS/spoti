@@ -28,7 +28,7 @@ module logo(){
 //difference() {
     // Background cylinder
     //cylinder(h = 10, r = 10, $fn = 100);
-linear_extrude(40){
+linear_extrude(20){
     // Arc 1
     translate([-5, 0, 0])   
     difference() {
@@ -148,6 +148,17 @@ translate([14, 14, octagon_height / 2])
 }
  }
   }
+// logo flip
+   difference(){
+ translate([0,0,10]){
+          octagonz(size = 20, height = sc);
+ translate([0,0,12]){ 
+     rotate([-90,0,0])
+          rotate([0,-90,180])logo();
+}
+ }
+  }
+
 
  
 translate([-20,0,12]){
@@ -175,8 +186,8 @@ difference(){
     ah... ring height * 22 rings. so 5*22=110
     + what? 0.. filled body with a different ring
     */
- cylinder(112,12,13.2); //13.2 is 0.13 less than ring inner radius
- cylinder(112,10,10);
+ cylinder(115,13.25,13.25); //13.2 is 0.13 less than ring inner radius
+ cylinder(115,8,8);
 }
 }
 /*
