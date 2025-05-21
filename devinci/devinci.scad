@@ -175,7 +175,7 @@ difference(){
     ah... ring height * 22 rings. so 5*22=110
     + what? 0.. filled body with a different ring
     */
- cylinder(112,12,13.2); //13.2 is 0.13 less than ring inner radius
+ cylinder(112,13.25,13.25); //13.2 is 0.13 less than ring inner radius
  cylinder(112,10,10);
 }
 }
