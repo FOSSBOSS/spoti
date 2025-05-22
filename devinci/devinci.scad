@@ -1,5 +1,17 @@
 $fn =200;
 // Octogons have 1080 degrees
+/*
+FUNCTIONAL Measurements:(mm)
+Face:42
+logo_outer_ring:28
+logo_arch_lg:28
+logo_arch_md:15
+logo_arch_sm:13
+Hullz_min:4.5
+HUllz_max:25.5
+spacing:2.4
+
+*/
 sc = 22;
 module arcz(radius = 10, angle = 90, thickness = 2, steps = 100, center = [0, 0]) {
     r1 = radius;
@@ -28,7 +40,7 @@ module logo(){
 //difference() {
     // Background cylinder
     //cylinder(h = 10, r = 10, $fn = 100);
-linear_extrude(40){
+linear_extrude(20){
     // Arc 1
     translate([-5, 0, 0])   
     difference() {
@@ -89,6 +101,23 @@ module octagonz(size = 20, height = 5) {
                 cylinder(h = height + 2, r = a, $fn = 64);
         }
 }
+
+// make the geometery easier 
+module body_octagon(size = 20, height = 5) {
+    a = size / 1.5;
+    
+    echo("A: ", a); // usefull later when you make the rings
+    points = [
+        for (i = [0 : 7])
+            [ size * cos(360 * i / 8), size * sin(360 * i / 8) ]
+    ];
+
+    rotate([0, 0, 22.5])  // align flat side
+            linear_extrude(height)
+                polygon(points);
+}
+
+
 module mk_ring(){
 // Show octagon
 octagon_height = 5;
@@ -148,6 +177,18 @@ translate([14, 14, octagon_height / 2])
 }
  }
   }
+// logo flip
+   difference(){
+ translate([0,0,10]){
+          //octagonz(size = 20, height = sc);
+     body_octagon(size = 20, height = sc);
+ translate([0,0,12]){ 
+     rotate([-90,0,0])
+          rotate([0,-90,180])logo();
+}
+ }
+  }
+
 
  
 translate([-20,0,12]){
@@ -168,15 +209,17 @@ rotate([90,0,90]) cylinder(40,5.5,5.5);
  }
  
 // MAKE A BODY
-translate([0,0,30]){
+translate([0,0,-100]){
 difference(){ 
     //how long tho?
     /*
     ah... ring height * 22 rings. so 5*22=110
     + what? 0.. filled body with a different ring
+    maybe the tappering in print is from warping?
+    made thicker walls.
     */
- cylinder(112,13.25,13.25); //13.2 is 0.13 less than ring inner radius
- cylinder(112,10,10);
+ cylinder(115,13.25,13.25); //13.2 is 0.13 less than ring inner radius
+ cylinder(115,8,8);
 }
 }
 /*
