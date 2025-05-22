@@ -1,4 +1,5 @@
-
+//Octogon has 1080 degrees,
+//Changed dimensions based on a working model
 // Hull shape module
 module hullz(length = 1, w = 3, h = 1) {
     radius = w / 2;
@@ -29,56 +30,31 @@ module octagonz(size = 20, height = 5) {
                 polygon(points);
 
             translate([0, 0, -1])  // penatrate
-                cylinder(h = height + 2, r = a, $fn = 64);
+                cylinder(h = height + 2, r = a, $fn = 100);
         }
 }
-module mk_ring(){
-// Show octagon
-octagon_height = 5;
-octagon_size = 20;
-octagonz(octagon_size, octagon_height);
 
-// hullz 1
-translate([0, octagon_size, octagon_height / 2])
-    rotate([0, 90, 0])
-        hullz(length = 2, w = 3, h = octagon_height);
+module mk_ring() {
+    octagon_height = 5;
+    octagon_size = 42; //A=28 at 42
 
+    // Show octagon
+    octagonz(octagon_size, octagon_height);
 
-// hullz 2
-translate([-14, 14, octagon_height / 2])
-    rotate([0, 90, 45]) // hull rotation
-        hullz(length = 3, w = 3, h = octagon_height);
+    // Loop to place 8 hullz()
+    for (itter = [0 : 7]) {
+        angle = itter * 45;
+        len = 4.5 + 2.625 * itter;
 
-// hullz 3
-translate([-20, 0, octagon_height / 2])
-    rotate([0, 90, 90]) // hull rotation
-        hullz(length = 4, w = 3, h = octagon_height);
-        
-// hullz 4
-translate([-11, -10, octagon_height / 2])
-    rotate([0, 90, -45]) // hull rotation
-        hullz(length = 5, w = 3, h = octagon_height);        
-        
-// hullz 5
-translate([0, -15, octagon_height / 2])
-    rotate([0, 90, 0]) // hull rotation
-        hullz(length = 6, w = 3, h = octagon_height);           
-    
-// hullz 6
-translate([10.5, -10.5, octagon_height / 2])
-    rotate([0, 90, 45]) // hull rotation
-        hullz(length = 7, w = 3, h = octagon_height); 
-        
-// hullz 7
-translate([15, 0, octagon_height / 2])
-    rotate([0, 90, 90]) // hull rotation
-        hullz(length = 8, w = 3, h = octagon_height);
+        translate([
+            octagon_size * cos(angle),
+            octagon_size * sin(angle),
+            octagon_height / 2
+        ])
+       
+        rotate([90, 90, angle])
+            hullz(length = len, w = 3, h = octagon_height);
+    }
+}
 
-// hullz 8
-translate([14, 14, octagon_height / 2])
-    rotate([0, 90, -45]) // hull rotation
-        hullz(length = 9, w = 3, h = octagon_height);  
- 
- }
- 
- mk_ring();
+mk_ring();
